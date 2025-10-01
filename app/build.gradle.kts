@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.sibel.marshall9plus"
-    compileSdk = 36
+    compileSdk = 36   // si ves warnings con el SDK del vendor, baja a 34
 
     defaultConfig {
         applicationId = "com.sibel.marshall9plus"
@@ -18,10 +18,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86_64"))
+            // Solo las ABIs para las que SÍ tienes .so en src/main/jniLibs/
+            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
         }
     }
 
+    // Las .so deben vivir en: app/src/main/jniLibs/<abi>/
     sourceSets {
         getByName("main") {
             jniLibs.srcDirs("src/main/jniLibs")
@@ -37,27 +39,31 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
-    }
+    kotlinOptions { jvmTarget = "11" }
+    buildFeatures { compose = true }
 
-    sourceSets {
-        getByName("main") {
-            jniLibs.srcDirs("src/main/jniLibs")
+    // (Opcional) Si ves choques de META-INF en los JAR del vendor
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/INDEX.LIST",
+                "META-INF/*.SF",
+                "META-INF/*.DSA",
+                "META-INF/*.RSA"
+            )
         }
     }
 }
 
 dependencies {
-
+    // Los JAR del vendor deben estar en: app/libs/
     implementation(files("libs/TrustFinger_v3.3.0.7.jar"))
+    implementation(files("libs/AraBMApiDev.jar"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

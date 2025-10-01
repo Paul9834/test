@@ -27,10 +27,6 @@ import com.aratek.trustfinger.sdk.SegmentImageDesc
 import com.aratek.trustfinger.sdk.TrustFinger
 import com.aratek.trustfinger.sdk.TrustFingerDevice
 import com.aratek.trustfinger.sdk.TrustFingerException
-import com.sibel.marshall9plus.ui.theme.Marshall9PlusTheme
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
 
@@ -46,44 +42,41 @@ class MainActivity : ComponentActivity() {
         initializeSDK()
 
         setContent {
-            Marshall9PlusTheme {
-                MultiFingerprintDemoScreen()
-            }
+            AppUI()
         }
     }
 
     private fun checkIfEmulator(): Boolean {
         return (Build.FINGERPRINT.startsWith("generic")
                 || Build.FINGERPRINT.startsWith("unknown")
-                || Build.MODEL.contains("google_sdk")
-                || Build.MODEL.contains("Emulator")
-                || Build.MODEL.contains("Android SDK built for x86")
-                || Build.MANUFACTURER.contains("Genymotion")
+                || Build.MODEL.contains("google_sdk", true)
+                || Build.MODEL.contains("Emulator", true)
+                || Build.MODEL.contains("Android SDK built for x86", true)
+                || Build.MANUFACTURER.contains("Genymotion", true)
                 || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
                 || "google_sdk" == Build.PRODUCT)
     }
 
     private fun initializeSDK() {
         if (isRunningOnEmulator) {
-            Log.w("TrustFinger", "Running on emulator - SDK not initialized")
+            Log.w("TrustFinger", "Emulador detectado - no se inicializa SDK")
             return
         }
-
         try {
             trustFinger = TrustFinger.getInstance(this)
             trustFinger?.initialize()
-            Log.i("TrustFinger", "SDK initialized successfully")
+            Log.i("TrustFinger", "SDK inicializado")
         } catch (e: TrustFingerException) {
-            Log.e("TrustFinger", "Failed to initialize SDK", e)
-            e.printStackTrace()
+            Log.e("TrustFinger", "Fallo al inicializar SDK", e)
         } catch (e: UnsatisfiedLinkError) {
-            Log.e("TrustFinger", "Native library not found - requires physical device", e)
+            Log.e("TrustFinger", "Faltan librerías nativas (usa dispositivo físico)", e)
         }
     }
 
+    // ---------- UI ----------
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun MultiFingerprintDemoScreen() {
+    private fun AppUI() {
         var statusMessage by remember {
             mutableStateOf(
                 if (isRunningOnEmulator) "⚠️ Emulator detected - Connect a physical Android device"
@@ -92,15 +85,13 @@ class MainActivity : ComponentActivity() {
         }
         var deviceCount by remember { mutableStateOf(0) }
         var capturedFingerprints by remember { mutableStateOf<List<FingerprintData>>(emptyList()) }
-        var isProcessing by remember { mutableStateOf(false) }
-        var selectedMode by remember { mutableStateOf(CaptureMode.FOUR_FINGERS_RIGHT) }
 
-        val scope = rememberCoroutineScope()
+        var isOpening by remember { mutableStateOf(false) }
+        var isProcessing by remember { mutableStateOf(false) }
+        var selectedMode by remember { mutableStateOf(CaptureMode.SINGLE_FINGER) } // arranca estable
 
         LaunchedEffect(Unit) {
-            if (!isRunningOnEmulator) {
-                deviceCount = getDeviceCount()
-            }
+            if (!isRunningOnEmulator) deviceCount = getDeviceCount()
         }
 
         Scaffold(
@@ -122,26 +113,23 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+
+                // SDK info
                 item {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(
-                            containerColor = if (isRunningOnEmulator) {
+                            containerColor = if (isRunningOnEmulator)
                                 MaterialTheme.colorScheme.errorContainer
-                            } else {
+                            else
                                 MaterialTheme.colorScheme.surfaceVariant
-                            }
                         )
                     ) {
                         Column(
                             modifier = Modifier.padding(16.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Text(
-                                text = "SDK Info",
-                                style = MaterialTheme.typography.titleMedium
-                            )
-
+                            Text("SDK Info", style = MaterialTheme.typography.titleMedium)
                             if (isRunningOnEmulator) {
                                 Text(
                                     "⚠️ Running on Emulator",
@@ -149,7 +137,7 @@ class MainActivity : ComponentActivity() {
                                     style = MaterialTheme.typography.bodyLarge
                                 )
                                 Text(
-                                    "TrustFinger SDK requires a physical Android device with USB OTG support",
+                                    "TrustFinger SDK requiere dispositivo físico con USB OTG",
                                     style = MaterialTheme.typography.bodySmall
                                 )
                             } else {
@@ -157,13 +145,12 @@ class MainActivity : ComponentActivity() {
                                 Text("Algorithm: ${trustFinger?.getAlgVersion() ?: "N/A"}")
                                 Text("Devices Connected: $deviceCount")
                             }
-
                             Text(
                                 text = statusMessage,
-                                color = if (statusMessage.contains("Error") || statusMessage.contains("⚠️")) {
-                                    MaterialTheme.colorScheme.error
-                                } else {
-                                    MaterialTheme.colorScheme.primary
+                                color = when {
+                                    statusMessage.contains("Error") || statusMessage.contains("⚠️") ->
+                                        MaterialTheme.colorScheme.error
+                                    else -> MaterialTheme.colorScheme.primary
                                 }
                             )
                         }
@@ -171,6 +158,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 if (!isRunningOnEmulator) {
+
+                    // Selector de modo
                     item {
                         Card(
                             modifier = Modifier.fillMaxWidth(),
@@ -182,11 +171,7 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.padding(16.dp),
                                 verticalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Text(
-                                    text = "Capture Mode",
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-
+                                Text("Capture Mode", style = MaterialTheme.typography.titleMedium)
                                 CaptureMode.values().forEach { mode ->
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
@@ -194,7 +179,7 @@ class MainActivity : ComponentActivity() {
                                     ) {
                                         RadioButton(
                                             selected = selectedMode == mode,
-                                            onClick = { selectedMode = mode }
+                                            onClick = { if (!isOpening && !isProcessing) selectedMode = mode }
                                         )
                                         Text(mode.displayName)
                                     }
@@ -203,69 +188,82 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
+                    // Abrir
                     item {
                         Button(
                             onClick = {
-                                scope.launch {
-                                    openDevice { message ->
-                                        statusMessage = message
-                                    }
-                                }
+                                isOpening = true
+                                statusMessage = "Opening device..."
+                                openDevice(
+                                    onStatus = { msg -> runOnUiThread { statusMessage = msg } },
+                                    onDone = { runOnUiThread { isOpening = false } }
+                                )
                             },
                             modifier = Modifier.fillMaxWidth(),
-                            enabled = !isProcessing
+                            enabled = !isOpening && !isProcessing
                         ) {
-                            Text("Open Device")
+                            if (isOpening) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(20.dp),
+                                    strokeWidth = 2.dp,
+                                )
+                                Spacer(Modifier.width(8.dp))
+                                Text("Opening...")
+                            } else {
+                                Text("Open Device")
+                            }
                         }
                     }
 
+                    // Capturar
                     item {
                         Button(
                             onClick = {
                                 isProcessing = true
                                 capturedFingerprints = emptyList()
-                                scope.launch {
-                                    captureMultipleFingerprints(
-                                        mode = selectedMode,
-                                        onStatus = { message ->
-                                            statusMessage = message
-                                        },
-                                        onFingerprintsExtracted = { fingerprints ->
-                                            capturedFingerprints = fingerprints
+                                statusMessage = "Capturing..."
+                                captureMultipleFingerprints(
+                                    mode = selectedMode,
+                                    onStatus = { msg -> runOnUiThread { statusMessage = msg } },
+                                    onFingerprintsExtracted = { fps ->
+                                        runOnUiThread {
+                                            capturedFingerprints = fps
                                             isProcessing = false
                                         }
-                                    )
-                                }
+                                    }
+                                )
                             },
                             modifier = Modifier.fillMaxWidth(),
-                            enabled = device != null && !isProcessing
+                            enabled = device != null && !isOpening && !isProcessing
                         ) {
                             if (isProcessing) {
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(20.dp),
                                     strokeWidth = 2.dp,
-                                    color = MaterialTheme.colorScheme.onPrimary
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
+                                Spacer(Modifier.width(8.dp))
+                                Text("Capturing…")
+                            } else {
+                                Text("Capture ${selectedMode.displayName}")
                             }
-                            Text(if (isProcessing) "Capturing..." else "Capture ${selectedMode.displayName}")
                         }
                     }
 
+                    // Cerrar
                     item {
                         Button(
                             onClick = {
+                                statusMessage = "Closing device…"
                                 closeDevice()
                                 statusMessage = "Device Closed"
                                 capturedFingerprints = emptyList()
                             },
                             modifier = Modifier.fillMaxWidth(),
-                            enabled = device != null && !isProcessing
-                        ) {
-                            Text("Close Device")
-                        }
+                            enabled = device != null && !isOpening && !isProcessing
+                        ) { Text("Close Device") }
                     }
 
+                    // Resultado
                     if (capturedFingerprints.isNotEmpty()) {
                         item {
                             Text(
@@ -274,8 +272,7 @@ class MainActivity : ComponentActivity() {
                                 color = MaterialTheme.colorScheme.primary
                             )
                         }
-
-                        itemsIndexed(capturedFingerprints) { index, fingerprintData ->
+                        itemsIndexed(capturedFingerprints) { index, fp ->
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 elevation = CardDefaults.cardElevation(4.dp)
@@ -286,18 +283,16 @@ class MainActivity : ComponentActivity() {
                                     verticalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
                                     Text(
-                                        text = "Finger #${index + 1} - ${fingerprintData.position}",
+                                        "Finger #${index + 1} - ${fp.position}",
                                         style = MaterialTheme.typography.titleMedium
                                     )
-
                                     Image(
-                                        bitmap = fingerprintData.bitmap.asImageBitmap(),
+                                        bitmap = fp.bitmap.asImageBitmap(),
                                         contentDescription = "Fingerprint ${index + 1}",
                                         modifier = Modifier
                                             .size(200.dp)
                                             .border(1.dp, Color.Gray)
                                     )
-
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
                                         horizontalArrangement = Arrangement.SpaceEvenly
@@ -305,25 +300,18 @@ class MainActivity : ComponentActivity() {
                                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                             Text("Quality", style = MaterialTheme.typography.labelSmall)
                                             Text(
-                                                text = "${fingerprintData.quality}",
+                                                "${fp.quality}",
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 color = when {
-                                                    fingerprintData.quality >= 80 -> Color(0xFF4CAF50)
-                                                    fingerprintData.quality >= 50 -> Color(0xFFFF9800)
+                                                    fp.quality >= 80 -> Color(0xFF4CAF50)
+                                                    fp.quality >= 50 -> Color(0xFFFF9800)
                                                     else -> Color(0xFFF44336)
                                                 }
                                             )
                                         }
-
                                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                            Text(
-                                                "Feature Size",
-                                                style = MaterialTheme.typography.labelSmall
-                                            )
-                                            Text(
-                                                text = "${fingerprintData.featureData.size} bytes",
-                                                style = MaterialTheme.typography.bodyLarge
-                                            )
+                                            Text("Feature Size", style = MaterialTheme.typography.labelSmall)
+                                            Text("${fp.featureData.size} bytes", style = MaterialTheme.typography.bodyLarge)
                                         }
                                     }
                                 }
@@ -335,51 +323,52 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun getDeviceCount(): Int {
-        return try {
-            trustFinger?.deviceCount ?: 0
-        } catch (e: TrustFingerException) {
-            0
-        }
-    }
+    private fun getDeviceCount(): Int =
+        runCatching { trustFinger?.deviceCount ?: 0 }.getOrDefault(0)
 
-    private suspend fun openDevice(onStatus: (String) -> Unit) = withContext(Dispatchers.Main) {
+    // ---------- Apertura con estados ----------
+    private fun openDevice(
+        onStatus: (String) -> Unit,
+        onDone: () -> Unit
+    ) {
         try {
+            onStatus("Opening device…")
             trustFinger?.openDevice(0, object : DeviceOpenListener {
                 override fun openSuccess(trustFingerDevice: TrustFingerDevice) {
                     device = trustFingerDevice
                     val info = device?.imageInfo
                     onStatus("Device Opened: ${info?.width}x${info?.height} @ ${info?.resolution}dpi")
+                    onDone()
                 }
-
                 override fun openFail(errorMessage: String) {
-                    onStatus("Error: $errorMessage")
+                    onStatus("Error opening: $errorMessage")
+                    onDone()
                 }
             })
         } catch (e: TrustFingerException) {
-            onStatus("Error: ${e.message}")
+            onStatus("Error opening: ${e.message}")
+            onDone()
+        } catch (t: Throwable) {
+            onStatus("Error opening: ${t.message}")
+            onDone()
         }
     }
 
-    private suspend fun captureMultipleFingerprints(
+    // ---------- Captura “a prueba de crash” ----------
+    private fun captureMultipleFingerprints(
         mode: CaptureMode,
         onStatus: (String) -> Unit,
         onFingerprintsExtracted: (List<FingerprintData>) -> Unit
-    ) = withContext(Dispatchers.Main) {
-        val currentDevice = device
-        if (currentDevice == null) {
+    ) {
+        val currentDevice = device ?: run {
             onStatus("Error: Device not opened")
-            return@withContext
+            return
         }
 
         try {
-            onStatus("Place ${mode.displayName} on sensor...")
+            onStatus("Place ${mode.displayName} on sensor…")
 
-            val param = MultiFingerParam(
-                mode.inputImageType,
-                15000,
-                1
-            )
+            val param = MultiFingerParam(mode.inputImageType, /*timeout*/ 20_000, /*retries*/ 2)
 
             currentDevice.multiFingerCapture(param, object : MultiFingerCallback {
                 override fun multiFingerCallback(
@@ -388,93 +377,93 @@ class MainActivity : ComponentActivity() {
                     segmentImageDesc: Array<SegmentImageDesc>,
                     numberOfSegment: Int
                 ) {
-                    when (occurredEventCode) {
-                        1 -> {
-                            onStatus("Processing image...")
-                        }
+                    try {
+                        when (occurredEventCode) {
+                            1 -> runOnUiThread { onStatus("Processing image…") }
 
-                        9 -> {
-                            if (numberOfSegment > 0) {
-                                onStatus("Successfully captured $numberOfSegment fingerprint(s)!")
+                            9 -> {
+                                if (numberOfSegment <= 0) return
+                                // decodificar desde el RAW COMPLETO (NO usar pSegmentImagePtr)
+                                Thread {
+                                    val out = ArrayList<FingerprintData>(numberOfSegment)
+                                    try {
+                                        val info = currentDevice.imageInfo
+                                        val fullBmpBytes = runCatching {
+                                            currentDevice.rawToBmp(rawData, info.width, info.height, info.resolution)
+                                        }.getOrNull()
 
-                                val fingerprints = mutableListOf<FingerprintData>()
+                                        val fullBitmap = runCatching {
+                                            fullBmpBytes?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+                                        }.getOrNull()
 
-                                for (i in 0 until numberOfSegment) {
-                                    val desc = segmentImageDesc[i]
-                                    val bmpData = currentDevice.rawToBmp(
-                                        desc.pSegmentImagePtr,
-                                        desc.nFingerwidth,
-                                        desc.nFingerheight,
-                                        500
-                                    )
-                                    val bitmap = BitmapFactory.decodeByteArray(bmpData, 0, bmpData.size)
-                                    val quality = currentDevice.bmpDataQuality(bmpData)
+                                        val qualityWhole = runCatching {
+                                            fullBmpBytes?.let { currentDevice.bmpDataQuality(it) } ?: 0
+                                        }.getOrElse { 0 }
 
-                                    fingerprints.add(
-                                        FingerprintData(
-                                            bitmap = bitmap,
-                                            quality = quality,
-                                            featureData = desc.pFeatureData,
-                                            position = getFingerPositionName(desc.nFingerPos)
-                                        )
-                                    )
-                                }
+                                        for (i in 0 until numberOfSegment) {
+                                            val d = segmentImageDesc.getOrNull(i) ?: continue
+                                            val bmpForUi = fullBitmap ?: continue
+                                            out.add(
+                                                FingerprintData(
+                                                    bitmap = bmpForUi, // mostramos el slap completo
+                                                    quality = qualityWhole,
+                                                    featureData = d.pFeatureData ?: ByteArray(0),
+                                                    position = getFingerPositionName(d.nFingerPos)
+                                                )
+                                            )
+                                        }
+                                    } catch (t: Throwable) {
+                                        Log.e("TrustFinger", "decode/process error", t)
+                                    }
+                                    runOnUiThread {
+                                        onFingerprintsExtracted(out)
+                                        onStatus("Successfully captured ${out.size} fingerprint(s)!")
+                                    }
+                                }.start()
+                            }
 
-                                onFingerprintsExtracted(fingerprints)
+                            // errores/estados
+                            -5 -> runOnUiThread {
+                                onStatus("Error: Low quality. Try again.")
+                                onFingerprintsExtracted(emptyList())
+                            }
+                            11 -> runOnUiThread {
+                                onStatus("Error: Timeout. Please try again.")
+                                onFingerprintsExtracted(emptyList())
+                            }
+                            -2 -> runOnUiThread {
+                                onStatus("Error: No fingers detected")
+                                onFingerprintsExtracted(emptyList())
+                            }
+                            -8 -> runOnUiThread {
+                                onStatus("Error: Wrong number of fingers. Expected ${mode.expectedFingers}")
+                                onFingerprintsExtracted(emptyList())
                             }
                         }
-
-                        -5 -> {
-                            onStatus("Error: Low quality. Try again.")
-                            onFingerprintsExtracted(emptyList())
-                        }
-
-                        11 -> {
-                            onStatus("Error: Timeout. Please try again.")
-                            onFingerprintsExtracted(emptyList())
-                        }
-
-                        -2 -> {
-                            onStatus("Error: No fingers detected")
-                            onFingerprintsExtracted(emptyList())
-                        }
-
-                        -8 -> {
-                            onStatus("Error: Wrong number of fingers. Expected ${mode.expectedFingers}")
+                    } catch (t: Throwable) {
+                        Log.e("TrustFinger", "callback crash", t)
+                        runOnUiThread {
+                            onStatus("Error (callback): ${t.message}")
                             onFingerprintsExtracted(emptyList())
                         }
                     }
                 }
             })
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             onStatus("Error: ${e.message}")
             onFingerprintsExtracted(emptyList())
+            Log.e("TrustFinger", "captureMultipleFingerprints", e)
         }
     }
 
-    private fun getFingerPositionName(position: Int): String {
-        return when (position) {
-            1 -> "Right Thumb"
-            2 -> "Right Index"
-            3 -> "Right Middle"
-            4 -> "Right Ring"
-            5 -> "Right Little"
-            6 -> "Left Thumb"
-            7 -> "Left Index"
-            8 -> "Left Middle"
-            9 -> "Left Ring"
-            10 -> "Left Little"
-            else -> "Unknown"
-        }
+    private fun getFingerPositionName(position: Int): String = when (position) {
+        1 -> "Right Thumb"; 2 -> "Right Index"; 3 -> "Right Middle"; 4 -> "Right Ring"; 5 -> "Right Little";
+        6 -> "Left Thumb"; 7 -> "Left Index"; 8 -> "Left Middle"; 9 -> "Left Ring"; 10 -> "Left Little"; else -> "Unknown"
     }
 
     private fun closeDevice() {
-        try {
-            device?.close()
-            device = null
-        } catch (e: TrustFingerException) {
-            e.printStackTrace()
-        }
+        runCatching { device?.close() }
+        device = null
     }
 
     override fun onDestroy() {
@@ -491,11 +480,7 @@ data class FingerprintData(
     val position: String
 )
 
-enum class CaptureMode(
-    val displayName: String,
-    val inputImageType: Int,
-    val expectedFingers: Int
-) {
+enum class CaptureMode(val displayName: String, val inputImageType: Int, val expectedFingers: Int) {
     BOTH_THUMBS("Both Thumbs", 21, 2),
     FOUR_FINGERS_LEFT("4 Fingers Left Hand", 22, 4),
     FOUR_FINGERS_RIGHT("4 Fingers Right Hand", 23, 4),
