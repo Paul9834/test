@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_device_type"
+                    style="@style/LableTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/lable_device_type"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/sp_device_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/device_type" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_usb_device"
+                    style="@style/LableTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/lable_usb_device"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+                <Spinner
+                    android:id="@+id/sp_usb_device"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_open_device"
+            style="@style/MyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="@string/btn_open_device" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/darker_gray" />
+
+
+    <LinearLayout
+        android:id="@+id/llSetting"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/llLfd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_lfd_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="LFD:"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/sp_lfd_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:clickable="false"
+                android:entries="@array/spoofing_level"
+                android:paddingRight="15dp"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_dry_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/cb_dry_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Dry Finger:"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/sp_select_dryfingerlevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:clickable="false"
+                android:entries="@array/DryFingerLevel"
+                android:paddingRight="15dp"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="UserName: "
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:clickable="false"
+            android:entries="@array/DryFingerLevel"
+            android:minWidth="120dp"
+            android:paddingRight="15dp"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

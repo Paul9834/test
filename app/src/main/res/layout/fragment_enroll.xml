@@ -1,0 +1,895 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv_content"
+    style="@style/scrollbar_shape_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadeScrollbars="true"
+    tools:context="com.aratek.trustfinger.fragment.EnrollFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="left|center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:text="10 finger image show:"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/btn_clear_all_image"
+                style="@style/MyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/btn_delete_all"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+<!--        <View-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:background="@android:color/darker_gray" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_right_thumb"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_right_index"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_right_middle"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_right_ring"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_right_little"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_left_thumb"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_left_index"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_left_middle"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:background="@android:color/darker_gray" />-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_9"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_left_ring"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+<!--            <View-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_border"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/tv_finger_left_lilttle"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            >
+
+            <LinearLayout
+                android:id="@+id/ly_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/LableTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|right"
+                            android:text="@string/lable_user_id"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+                    </LinearLayout>
+
+
+                    <EditText
+                        android:id="@+id/et_user_id"
+                        style="@style/MyEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:gravity="center_vertical|left"
+                        android:hint="input your id"
+                        android:imeOptions="actionNext"
+                        android:nextFocusForward="@id/et_user_first_name"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="@dimen/edittext_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/LableTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|right"
+                            android:text="@string/lable_user_first_name"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|left"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_user_first_name"
+                        style="@style/MyEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                        android:inputType=""
+                        android:gravity="center_vertical|left"
+                        android:hint="input your name"
+                        android:imeOptions="actionDone"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="@dimen/edittext_size" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+
+                    <ImageView
+                        android:id="@+id/iv_tips_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_tips_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_start_stop_enroll"
+                    style="@style/MyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:layout_margin="5dp"
+                    android:text="@string/btn_start_enroll"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <Button
+                    android:id="@+id/btn_start_stop_identify"
+                    style="@style/MyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:layout_margin="5dp"
+                    android:text="@string/btn_start_identify"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <Button
+                    android:id="@+id/btn_clear_database"
+                    style="@style/MyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:layout_margin="5dp"
+                    android:text="Clear Database"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Identify Finger Pos"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lable_list_user_id"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lable_list_user_first_name"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lable_list_user_finger_position"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lable_list_similarity"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="240px"
+                    android:background="@android:color/white">
+
+                    <com.aratek.trustfinger.widget.MyListView
+                        android:id="@+id/lv_identify_user_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="10dp"
+                        android:scrollbarThumbVertical="@drawable/thumb01"
+                        android:scrollbars="vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_no_result_datas"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+
+                        android:textSize="20sp" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

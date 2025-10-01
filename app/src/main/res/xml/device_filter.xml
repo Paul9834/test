@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <usb-device vendor-id="9639" product-id="4097" />
+
+    <usb-device vendor-id="9639" product-id="4097" />
+    <usb-device vendor-id="9639" product-id="4098" />
+    <usb-device vendor-id="9639" product-id="4099" />
+
+    <!--A400-->
+    <usb-device vendor-id="0x28ed" product-id="0x1023" />
+    <usb-device vendor-id="0x368A" product-id="0x0001" />
+    <usb-device vendor-id="0x368A" product-id="0x0002" />
+   <!--A600-->
+    <usb-device vendor-id="0x28ed" product-id="0x1024" />
+   <!--A620-->
+    <usb-device vendor-id="0x28ed" product-id="0x1043" />
+   <!--EM03-->
+    <usb-device vendor-id="0x28ed" product-id="0x2033" />
+    <usb-device vendor-id="0x28ed" product-id="0x2034" />
+    <usb-device vendor-id="0x28ed" product-id="0x2041" />
+    <usb-device vendor-id="0x28ed" product-id="0x2042" />
+    <usb-device vendor-id="0x28ed" product-id="0x2043" />
+    <!--EMxxxx-->
+    <usb-device vendor-id="0x28ed" product-id="0x1061" />
+    <usb-device vendor-id="0x28ed" product-id="0x2021" />
+    <usb-device vendor-id="0x28ed" product-id="0x2022" />
+    <usb-device vendor-id="0x28ed" product-id="0x2023" />
+    <usb-device vendor-id="0x28ed" product-id="0x2024" />
+    <usb-device vendor-id="0x28ed" product-id="0x2031" />
+   <!--RT610-->
+    <usb-device vendor-id="0x28ed" product-id="0x610a" />
+    <usb-device vendor-id="0x28ed" product-id="0x610b" />
+    <usb-device vendor-id="0x28ed" product-id="0x9005" />
+    <!--CID4000-->
+    <usb-device vendor-id="0x28ed" product-id="0x4000" />
+    <!--CID7000-->
+    <usb-device vendor-id="0x28ed" product-id="0x7000" />
+    <!--A700-->
+    <usb-device vendor-id="0x28ed" product-id="0x1124" />
+    <!--A710-->
+    <usb-device vendor-id="0x28ed" product-id="0x1063" />
+    <!--Multi A800-->
+    <usb-device vendor-id="0x28ed" product-id="0x1032" />
+    <!--Multi A900-->
+    <usb-device vendor-id="0x28ed" product-id="0x1033" />
+    <usb-device vendor-id="0x28ed" product-id="0x1042" />
+    <!--Multi A910-->
+    <usb-device vendor-id="0x28ed" product-id="0x1034" />
+</resources>

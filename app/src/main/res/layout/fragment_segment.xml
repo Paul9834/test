@@ -1,0 +1,620 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv_content"
+    style="@style/scrollbar_shape_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadeScrollbars="true"
+    tools:context="com.aratek.trustfinger.fragment.MultiFingerFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_select_scanned_object"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/arrow_3_down"
+                    android:gravity="left|center_vertical"
+                    android:textColor="@drawable/et_text_selector"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+
+                <Button
+                    android:id="@+id/btn_start_capture"
+                    style="@style/MyButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/btn_start_capture"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btn_save"
+                    style="@style/MyButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/btn_save"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    style="@style/MyButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/btn_delete"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="left|center_vertical"
+                    android:text="MissingFinger Select:"
+                    android:textColor="@drawable/et_text_selector"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/ly_hand1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_left_lilttle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_left_ring"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_left_middle"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_left_index"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_left_thumb"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1.2"
+                            android:enabled="false"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_right_thumb"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.2"
+                            android:enabled="false"
+                            android:visibility="invisible" />
+
+                        <CheckBox
+                            android:id="@+id/cb_right_index"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_right_middle"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_right_ring"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1" />
+
+                        <CheckBox
+                            android:id="@+id/cb_right_little"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ly_hand"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_left_lilttle"
+                            android:layout_width="0dp"
+                            android:layout_height="70dp"
+                            android:layout_weight="0.8"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f5_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_left_ring"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f4_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_left_middle"
+                            android:layout_width="0dp"
+                            android:layout_height="110dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f3_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_left_index"
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f2_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_left_thumb"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1.2"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f1_normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_right_thumb"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.2"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f1_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_right_index"
+                            android:layout_width="0dp"
+                            android:layout_height="90dp"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f2_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_right_middle"
+                            android:layout_width="0dp"
+                            android:layout_height="110dp"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f3_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_right_ring"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="0dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f4_normal" />
+
+                        <com.aratek.trustfinger.widget.FingerView
+                            android:id="@+id/fv_right_little"
+                            android:layout_width="0dp"
+                            android:layout_height="70dp"
+                            android:layout_margin="0dp"
+                            android:layout_weight="0.8"
+                            android:padding="0dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/f5_normal" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/darker_gray" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_tips_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_tips_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical|left"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="8">
+
+                    <ImageView
+                        android:id="@+id/iv_fingerprint"
+                        android:layout_width="600dp"
+                        android:layout_height="563dp"
+                        android:background="@drawable/bg_border"
+                        android:scaleType="fitEnd" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:layout_marginBottom="5dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@android:color/darker_gray" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_image_position_1"
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="Finger 1"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            <View-->
+            <!--                android:layout_width="1dp"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_marginBottom="5dp"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_image_position_2"
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="Finger 2"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            <View-->
+            <!--                android:layout_width="1dp"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_marginBottom="5dp"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_image_position_3"
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="Finger 3"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--            <View-->
+            <!--                android:layout_width="1dp"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_marginBottom="5dp"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:background="@android:color/darker_gray" />-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_fingerprint_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_image_position_4"
+                        style="@style/LableTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text="Finger 4"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_image_quality_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+
+    </LinearLayout>
+</ScrollView>
